@@ -1,0 +1,174 @@
+/* Modern E-commerce App Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gradient-bg, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+  min-height: 100vh;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Theme-aware background */
+.dark-theme .App {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.light-theme .App {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+  z-index: -1;
+  animation: backgroundFloat 20s ease-in-out infinite alternate;
+  transition: opacity 0.3s ease;
+}
+
+.dark-theme .App::before {
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(60, 60, 120, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(120, 60, 120, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(60, 120, 180, 0.2) 0%, transparent 50%);
+}
+
+@keyframes backgroundFloat {
+  0% {
+    transform: translateX(-10px) translateY(-10px);
+  }
+  100% {
+    transform: translateX(10px) translateY(10px);
+  }
+}
+
+.main-content {
+  background: var(--card-bg, rgba(255, 255, 255, 0.95));
+  backdrop-filter: blur(20px);
+  min-height: calc(100vh - 54px);
+  margin-top: 54px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -10px 30px var(--shadow-color, rgba(0, 0, 0, 0.1));
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  color: var(--text-primary, #333);
+}
+
+.main-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color, rgba(255, 255, 255, 0.6)), transparent);
+}
+
+/* Dark theme main content */
+.dark-theme .main-content {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  box-shadow: 0 -10px 30px var(--shadow-color);
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary, rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+/* Dark theme scrollbar */
+.dark-theme ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+/* Modern Focus States */
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.dark-theme *:focus {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--bg-secondary, #f0f0f0) 25%, var(--border-color, #e0e0e0) 50%, var(--bg-secondary, #f0f0f0) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    border-radius: 15px 15px 0 0;
+    margin-top: 54px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    border-radius: 10px 10px 0 0;
+  }
+}
